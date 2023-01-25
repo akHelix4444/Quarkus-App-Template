@@ -25,6 +25,10 @@ ext {
     quarkusPlatformGroupId = project.getProperty("quarkusPlatformGroupId")
     quarkusPlatformArtifactId = project.getProperty("quarkusPlatformArtifactId")
     quarkusPlatformVersion = project.getProperty("quarkusPlatformVersion")
+
+    mapStructVersion = project.getProperty("mapStructVersion")
+    lombokVersion = project.getProperty("lombokVersion")
+    lombokMapStructBindingVersion = project.getProperty("lombokMapStructBindingVersion")
 }
 
 repositories {
@@ -37,10 +41,24 @@ dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
 
     // Core
-    implementation 'io.quarkus:quarkus-arc'
+    implementation "io.quarkus:quarkus-arc"
+
+    // Lombok & MapStruct
+    compileOnly "org.mapstruct:mapstruct:${mapStructVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapStructBindingVersion}"
 
     // Test scope
     testImplementation 'io.quarkus:quarkus-junit5'
+
+    // Lombok & MapStruct
+    testCompileOnly "org.mapstruct:mapstruct:${mapStructVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapStructBindingVersion}"
 }
 
 test {
