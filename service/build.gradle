@@ -1,0 +1,52 @@
+plugins {
+    id "java"
+    id "io.quarkus"
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+group "org.helix4444"
+version "1.0.0-SNAPSHOT"
+
+ext {
+    quarkusPlatformGroupId = project.getProperty("quarkusPlatformGroupId")
+    quarkusPlatformArtifactId = project.getProperty("quarkusPlatformArtifactId")
+    quarkusPlatformVersion = project.getProperty("quarkusPlatformVersion")
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    // Platform
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+    // Core
+    implementation 'io.quarkus:quarkus-arc'
+
+    // Test scope
+    testImplementation 'io.quarkus:quarkus-junit5'
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+
+    ignoreFailures = true
+
+    useJUnitPlatform()
+}
