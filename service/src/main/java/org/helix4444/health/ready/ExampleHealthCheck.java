@@ -1,5 +1,6 @@
 package org.helix4444.health.ready;
 
+import io.quarkus.logging.Log;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Readiness;
@@ -16,6 +17,8 @@ public class ExampleHealthCheck
     @Override
     public HealthCheckResponse call() {
         var probeCheckTime = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME);
+
+        Log.infov("Execute example readiness check at: {0}", probeCheckTime);
         return HealthCheckResponse.named("Example health check")
                 .up()
                 .withData("probeCheckTime", probeCheckTime)
