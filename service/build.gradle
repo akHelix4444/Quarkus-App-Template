@@ -75,4 +75,9 @@ test {
     ignoreFailures = true
 
     useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+        events = ["passed", "failed", "skipped"]
+    }
 }
