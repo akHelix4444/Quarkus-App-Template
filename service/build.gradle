@@ -29,6 +29,8 @@ ext {
     mapStructVersion = project.getProperty("mapStructVersion")
     lombokVersion = project.getProperty("lombokVersion")
     lombokMapStructBindingVersion = project.getProperty("lombokMapStructBindingVersion")
+
+    googleGuavaCoreVersion = project.getProperty("googleGuavaCoreVersion")
 }
 
 repositories {
@@ -42,6 +44,9 @@ dependencies {
 
     // Core
     implementation "io.quarkus:quarkus-arc"
+    implementation "io.quarkus:quarkus-config-yaml"
+
+    implementation "io.quarkus:quarkus-smallrye-health"
 
     // Lombok & MapStruct
     compileOnly "org.mapstruct:mapstruct:${mapStructVersion}"
@@ -49,6 +54,9 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapStructBindingVersion}"
+
+    // Additional utils
+    implementation "com.google.guava:guava:${googleGuavaCoreVersion}"
 
     // Test scope
     testImplementation 'io.quarkus:quarkus-junit5'
