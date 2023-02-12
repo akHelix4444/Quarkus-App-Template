@@ -18,7 +18,7 @@ compileTestJava {
     options.encoding = 'UTF-8'
 }
 
-group "org.helix4444"
+group "org.helix4444.quarkus"
 version "1.0.0-SNAPSHOT"
 
 ext {
@@ -59,7 +59,7 @@ dependencies {
     implementation "com.google.guava:guava:${googleGuavaCoreVersion}"
 
     // Test scope
-    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation "io.quarkus:quarkus-junit5"
 
     // Lombok & MapStruct
     testCompileOnly "org.mapstruct:mapstruct:${mapStructVersion}"

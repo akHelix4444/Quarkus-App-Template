@@ -1,3 +1,4 @@
-quarkus:
-  http:
-    port: 8844
+"%dev":
+  quarkus:
+    http:
+      port: 8844
