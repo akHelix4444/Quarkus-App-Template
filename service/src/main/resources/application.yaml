@@ -1,4 +1,4 @@
 "%dev":
   quarkus:
     http:
-      port: 8844
+      port: 8080

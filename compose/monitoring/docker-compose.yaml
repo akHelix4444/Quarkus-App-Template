@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  prometheus:
+    build:
+      context: .
+      dockerfile: ./prometheus/Dockerfile
+    container_name: prometheus
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "9090:9090"
+    volumes:
+      - "prometheus_data:/etc/prometheus"
+      - "./prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yml"
+
+  grafana:
+    build:
+      context: .
+      dockerfile: ./grafana/Dockerfile
+    container_name: grafana
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "grafana_data:/etc/grafana"
+      - "./grafana/config/grafana.ini:/etc/grafana/grafana.ini"
+      - "./grafana/provisioning/datasources/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml"
+      - "./grafana/provisioning/providers/provider.yaml:/etc/grafana/provisioning/dashboards/provider.yaml"
+      - "./grafana/provisioning/dashboards:/var/lib/grafana/dashboards"
+    links:
+      - prometheus
+
+volumes:
+  prometheus_data:
+  grafana_data:

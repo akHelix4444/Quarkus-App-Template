@@ -49,6 +49,9 @@ dependencies {
 
     implementation "io.quarkus:quarkus-smallrye-health"
 
+    // Observability
+    implementation "io.quarkus:quarkus-micrometer-registry-prometheus"
+
     // Lombok & MapStruct
     compileOnly "org.mapstruct:mapstruct:${mapStructVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
